@@ -49,8 +49,8 @@ runs:
         #This will return a 201 if the job is created, so we need to test for this
 
         #Generate Crumb value
-        CRUMB=`curl -s -u "$userName:$password" $urlOfJenkinsServer'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`
-        TRIGGERJOBJSON=$(curl -I -s -X POST -u "$userName:$password"  -H "$CRUMB" "$urlOfJenkinsServer"/job/"$jenkinsJobName"/build)
+        #CRUMB=`curl -s -u "$userName:$password" $urlOfJenkinsServer'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`
+        TRIGGERJOBJSON=$(curl -I -u "$userName:$password" "$urlOfJenkinsServer"/job/"$jenkinsJobName"/build?token=GuyTest)
         
         if [[ $verbose == true ]]; then
           echo "Results of Triggering The Job:"
